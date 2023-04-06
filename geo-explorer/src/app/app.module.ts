@@ -1,18 +1,22 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
 
-import { AppRoutingModule } from './app-routing.module';
+import { AppRoutingModule } from '../infrastructure/app-routing.module';
 import { AppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {SharedModule} from "./modules/shared/shared.module";
+import {CountryPreviewModule} from "./modules/country-preview/country-preview.module";
+import {CountriesListModule} from "./modules/countries-list/countries-list.module";
+import {CountriesCompareModule} from "./modules/countries-compare/countries-compare.module";
 
 @NgModule({
   declarations: [
     AppComponent
   ],
   imports: [
-    BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    SharedModule,
+    CountryPreviewModule,
+    CountriesListModule,
+    CountriesCompareModule
   ],
   providers: [],
   bootstrap: [AppComponent]
