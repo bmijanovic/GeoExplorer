@@ -1,0 +1,221 @@
+
+
+<script src="https://kit.fontawesome.com/43bd8246b5.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,900&display=swap" rel="stylesheet">
+
+<!--HEADER-->
+<div class="comparison-table">
+    <div class="comparison-header">
+        <div class="comparison-column desktop">
+        </div>
+        <div onclick="getId(id)"  class="comparison-column col-1 header titleOne active" id="titleOne"  >
+            <h5 class="package">{{country1.common_name}}</h5>
+        </div>
+        <div onclick="getId(id)" class="comparison-column col-2 header titleTwo" id="titleTwo">
+            <h5 class="package">{{country2.common_name}}</h5>
+        </div>
+        <div onclick="getId(id)"  class="comparison-column header titleThree" id="titleThree" >
+            <h5 class="package">{{country3.common_name}}</h5>
+        </div>
+        <div class="comparison-column desktop">
+        </div>
+        <div class="comparison-column arrow">
+            <div class="active titleOne"></div>
+        </div>
+        <div class="comparison-column arrow">
+            <div class=" titleTwo"></div>
+        </div>
+        <div class="comparison-column arrow">
+            <div class=" titleThree"></div>
+        </div>
+    </div>
+
+
+    <!--PRICE-->
+
+    <h5 class="mobile row-title">Flag</h5>
+    <div class="comparison-table-row flex-table" >
+        <div class="comparison-column table-feature desktop row-title" >
+            <p>Flag</p>
+        </div>
+        <div class="comparison-column feature-content active titleOne">
+            <img src="{{country1.flag_png}}" alt="Country 1">
+        </div>
+        <div class="comparison-column feature-content titleTwo">
+            <img src="{{country2.flag_png}}" alt="Country 2">
+        </div>
+        <div class="comparison-column feature-content titleThree">
+            <img src="{{country3.flag_png}}" alt="Country 3">
+        </div>
+    </div>
+
+    <!--REPEAT ROW - copy from here-->
+    <h5 class="mobile row-title">Coat of arm</h5>
+    <div class="comparison-table-row flex-table" >
+        <div class="comparison-column table-feature desktop row-title" >
+            <p>Coat of arm</p>
+        </div>
+        <div class="comparison-column feature-content titleOne active">
+            <img src="{{country1.coat_of_arm}}" alt="Country 1">
+        </div>
+        <div class="comparison-column feature-content centre titleTwo">
+            <img src="{{country2.coat_of_arm}}" alt="Country 2">
+        </div>
+        <div class="comparison-column feature-content titleThree">
+            <img src="{{country3.coat_of_arm}}" alt="Country 2">
+        </div>
+    </div>
+
+    <!-- To here -->
+
+
+    <!--REPEAT ROW - copy from here-->
+    <h5 class="mobile row-title">Capital city</h5>
+    <div class="comparison-table-row flex-table" >
+        <div class="comparison-column table-feature desktop row-title" >
+            <p>Capital city</p>
+        </div>
+        <div class="comparison-column feature-content titleOne" >
+            <p>{{country1.capital[0]}}</p>
+        </div>
+        <div class="comparison-column feature-content centre titleTwo" >
+            <p>{{country2.capital[0]}}</p>
+        </div>
+        <div class="comparison-column feature-content titleThree"   >
+            <p>{{country3.capital[0]}}</p>
+        </div>
+    </div>
+
+    <!-- To here -->
+
+
+
+
+    <!--REPEAT ROW - copy from here-->
+    <h5 class="mobile row-title">Continents</h5>
+    <div class="comparison-table-row flex-table" >
+        <div class="comparison-column table-feature desktop row-title" >
+            <p>Continents</p>
+        </div>
+        <div class="comparison-column feature-content titleOne" >
+            <p>{{country1.continents.join(", ")}}</p>
+        </div>
+        <div class="comparison-column feature-content centre titleTwo">
+            <p>{{country2.continents.join(", ")}}</p>
+        </div>
+        <div class="comparison-column feature-content titleThree"   >
+            <p>{{country3.continents.join(", ")}}</p>
+        </div>
+    </div>
+
+    <!-- To here -->
+
+    <!--REPEAT ROW - copy from here-->
+    <h5 class="mobile row-title" id="test">Population</h5>
+    <div class="comparison-table-row flex-table" >
+        <div class="comparison-column table-feature desktop row-title" >
+            <p id="test-1">Population</p>
+        </div>
+        <div class="comparison-column feature-content titleOne active" >
+            <p>{{country1.population}}</p>
+        </div>
+        <div class="comparison-column feature-content centre titleTwo">
+            <p>{{country2.population}}</p>
+        </div>
+        <div class="comparison-column feature-content titleThree"   >
+            <p>{{country3.population}}</p>
+        </div>
+    </div>
+
+    <!-- To here -->
+
+
+
+    <!--REPEAT ROW - copy from here-->
+    <h5 class="mobile row-title">Area</h5>
+    <div class="comparison-table-row flex-table" >
+        <div class="comparison-column table-feature desktop row-title" >
+            <p>Area</p>
+        </div>
+        <div class="comparison-column feature-content titleOne active" >
+            <p>{{country1.area}} km<sup>2</sup></p>
+        </div>
+        <div class="comparison-column feature-content centre titleTwo">
+            <p>{{country2.area}} km<sup>2</sup></p>
+        </div>
+        <div class="comparison-column feature-content titleThree"   >
+            <p>{{country3.area}} km<sup>2</sup></p>
+        </div>
+    </div>
+
+    <!-- To here -->
+
+
+
+    <!--REPEAT ROW - copy from here-->
+
+    <h5 class="mobile row-title">Time zones</h5>
+    <div class="comparison-table-row flex-table" >
+        <div class="comparison-column table-feature desktop row-title" >
+            <p>Time zones</p>
+        </div>
+        <div class="comparison-column feature-content titleOne active" >
+            <ul>
+                <li *ngFor="let value of country1.timezones">{{ value }}</li>
+            </ul>
+        </div>
+        <div class="comparison-column feature-content centre titleTwo">
+            <ul>
+                <li *ngFor="let value of country2.timezones">{{ value }}</li>
+            </ul>
+        </div>
+        <div class="comparison-column feature-content titleThree"   >
+            <ul>
+                <li *ngFor="let value of country3.timezones">{{ value }}</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- To here -->
+
+
+    <!--REPEAT ROW - copy from here-->
+
+    <h5 class="mobile row-title">Language</h5>
+    <div class="comparison-table-row flex-table" >
+        <div class="comparison-column table-feature desktop row-title" >
+            <p>Language</p>
+        </div>
+        <div class="comparison-column feature-content titleOne active" >
+            <p>{{country1languages.join(", ")}}</p>
+        </div>
+        <div class="comparison-column feature-content centre titleTwo">
+            <p>{{country2languages.join(", ")}}</p>
+        </div>
+        <div class="comparison-column feature-content titleThree"   >
+            <p>{{country3languages.join(", ")}}</p>
+        </div>
+    </div>
+
+    <!-- To here -->
+
+    <!--REPEAT ROW - copy from here-->
+
+    <h5 class="mobile row-title">Status</h5>
+    <div class="comparison-table-row flex-table" >
+        <div class="comparison-column table-feature desktop row-title" >
+            <p>Status</p>
+        </div>
+        <div class="comparison-column feature-content titleOne active" >
+            <p>{{country1.status}}</p>
+        </div>
+        <div class="comparison-column feature-content centre titleTwo">
+            <p>{{country2.status}}</p>
+        </div>
+        <div class="comparison-column feature-content titleThree"   >
+            <p>{{country3.status}}</p>
+        </div>
+    </div>
+
+    <!-- To here -->
+</div>
