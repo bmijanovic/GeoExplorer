@@ -1,0 +1,20 @@
+.example-form {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  background: white;
+}
+
+.example-full-width {
+  font-size: 1.5rem;
+  width: 80%;
+}
+
+@media only screen and (max-width:780px) {
+  .example-full-width {
+    font-size: 0.6rem;
+    width: 80%;
+    height: 100%;
+  }
+}
+

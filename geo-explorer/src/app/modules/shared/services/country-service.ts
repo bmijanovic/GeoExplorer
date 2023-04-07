@@ -17,6 +17,10 @@ export class CountryService {
         return this.http.get<any>(`${this.url}/name/${name}`);
     }
 
+    getAllCountries(): Observable<any[]> {
+        return this.http.get<any[]>(`${this.url}/all`);
+    }
+
     parseToCountry(details: any): Country {
         let country = <Country>{
             common_name: details.name.common,

@@ -12,42 +12,77 @@ export class ComparisonTableComponent implements OnInit, OnDestroy {
 
   country1!: Country;
   country1languages!: string[];
+  isCountry1Found: boolean = false;
   country2!: Country;
   country2languages!: string[];
+  isCountry2Found: boolean = false;
   country3!: Country;
   country3languages!: string[];
+  isCountry3Found: boolean = false;
   country1Subscription: Subscription = new Subscription();
   country2Subscription: Subscription = new Subscription();
   country3Subscription: Subscription = new Subscription();
   constructor(
       private countryService: CountryService
-  ) {
-  }
+  ) {}
 
   ngOnInit(): void {
-    this.country1Subscription = this.countryService.getCountryDetails("Egypt").subscribe({
+
+  }
+
+  recieveCountry1($event: string) {
+    if($event == "") return;
+    this.country1Subscription = this.countryService.getCountryDetails($event).subscribe({
       next: (details) => {
-        this.country1 = this.countryService.parseToCountry(details[0]);
-        this.country1languages = Object.values(this.country1.languages)
-        console.log(this.country1)
-      }
-    })
-    this.country2Subscription = this.countryService.getCountryDetails("Canada").subscribe({
-      next: (details) => {
-        this.country2 = this.countryService.parseToCountry(details[0]);
-        this.country2languages = Object.values(this.country2.languages)
-        console.log(this.country2)
-      }
-    })
-    this.country3Subscription = this.countryService.getCountryDetails("Kosovo").subscribe({
-      next: (details) => {
-        this.country3 = this.countryService.parseToCountry(details[0]);
-        this.country3languages = Object.values(this.country3.languages)
-        console.log(this.country3)
+        if(details != null)
+        {
+          this.isCountry1Found = true;
+          this.country1 = this.countryService.parseToCountry(details[0]);
+          this.country1languages = Object.values(this.country1.languages)
+          console.log(this.country1)
+        }
+      },
+      error: (err) => {
+        alert("First country does not exist")
       }
     })
   }
 
+  recieveCountry2($event: string) {
+    if($event == "") return;
+    this.country2Subscription = this.countryService.getCountryDetails($event).subscribe({
+      next: (details) => {
+        if(details != null)
+        {
+          this.isCountry2Found = true;
+          this.country2 = this.countryService.parseToCountry(details[0]);
+          this.country2languages = Object.values(this.country2.languages)
+          console.log(this.country2)
+        }
+      },
+      error: (err) => {
+        alert("Second country does not exist")
+      }
+    })
+  }
+
+  recieveCountry3($event: string) {
+    if($event == "") return;
+    this.country3Subscription = this.countryService.getCountryDetails($event).subscribe({
+      next: (details) => {
+        if(details != null)
+        {
+          this.isCountry3Found = true;
+          this.country3 = this.countryService.parseToCountry(details[0]);
+          this.country3languages = Object.values(this.country3.languages)
+          console.log(this.country3)
+        }
+      },
+      error: (err) => {
+        alert("Third country does not exist")
+      }
+    })
+  }
   ngOnDestroy(): void {
     this.country1Subscription.unsubscribe();
     this.country2Subscription.unsubscribe();

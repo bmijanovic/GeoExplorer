@@ -8,19 +8,22 @@
     <div class="comparison-header">
         <div class="comparison-column desktop">
         </div>
-        <div onclick="getId(id)"  class="comparison-column col-1 header titleOne active" id="titleOne"  >
-            <h5 class="package">{{country1.common_name}}</h5>
+        <div class="comparison-column col-1 header titleOne" id="titleOne" >
+<!--            <h5 class="package" *ngIf="isCountry1Found">{{country1.common_name}}</h5>-->
+            <app-comparison-search (countryEvent)="recieveCountry1($event)"></app-comparison-search>
         </div>
-        <div onclick="getId(id)" class="comparison-column col-2 header titleTwo" id="titleTwo">
-            <h5 class="package">{{country2.common_name}}</h5>
+        <div class="comparison-column col-2 header titleTwo" id="titleTwo">
+<!--            <h5 class="package" *ngIf="isCountry2Found">{{country2.common_name}}</h5>-->
+            <app-comparison-search (countryEvent)="recieveCountry2($event)"></app-comparison-search>
         </div>
-        <div onclick="getId(id)"  class="comparison-column header titleThree" id="titleThree" >
-            <h5 class="package">{{country3.common_name}}</h5>
+        <div class="comparison-column header titleThree" id="titleThree" >
+<!--            <h5 class="package" *ngIf="isCountry3Found">{{country3.common_name}}</h5>-->
+            <app-comparison-search (countryEvent)="recieveCountry3($event)"></app-comparison-search>
         </div>
         <div class="comparison-column desktop">
         </div>
         <div class="comparison-column arrow">
-            <div class="active titleOne"></div>
+            <div class=" titleOne"></div>
         </div>
         <div class="comparison-column arrow">
             <div class=" titleTwo"></div>
@@ -39,13 +42,13 @@
             <p>Flag</p>
         </div>
         <div class="comparison-column feature-content active titleOne">
-            <img src="{{country1.flag_png}}" alt="Country 1">
+            <img src="{{country1.flag_png}}" alt="Country 1" *ngIf="isCountry1Found">
         </div>
         <div class="comparison-column feature-content titleTwo">
-            <img src="{{country2.flag_png}}" alt="Country 2">
+            <img src="{{country2.flag_png}}" alt="Country 2" *ngIf="isCountry2Found">
         </div>
         <div class="comparison-column feature-content titleThree">
-            <img src="{{country3.flag_png}}" alt="Country 3">
+            <img src="{{country3.flag_png}}" alt="Country 3" *ngIf="isCountry3Found">
         </div>
     </div>
 
@@ -56,13 +59,13 @@
             <p>Coat of arm</p>
         </div>
         <div class="comparison-column feature-content titleOne active">
-            <img src="{{country1.coat_of_arm}}" alt="Country 1">
+            <img src="{{country1.coat_of_arm}}" alt="Country 1" *ngIf="isCountry1Found">
         </div>
         <div class="comparison-column feature-content centre titleTwo">
-            <img src="{{country2.coat_of_arm}}" alt="Country 2">
+            <img src="{{country2.coat_of_arm}}" alt="Country 2" *ngIf="isCountry2Found">
         </div>
         <div class="comparison-column feature-content titleThree">
-            <img src="{{country3.coat_of_arm}}" alt="Country 2">
+            <img src="{{country3.coat_of_arm}}" alt="Country 2" *ngIf="isCountry3Found">
         </div>
     </div>
 
@@ -76,13 +79,13 @@
             <p>Capital city</p>
         </div>
         <div class="comparison-column feature-content titleOne" >
-            <p>{{country1.capital[0]}}</p>
+            <p *ngIf="isCountry1Found">{{country1.capital[0]}}</p>
         </div>
         <div class="comparison-column feature-content centre titleTwo" >
-            <p>{{country2.capital[0]}}</p>
+            <p *ngIf="isCountry2Found">{{country2.capital[0]}}</p>
         </div>
         <div class="comparison-column feature-content titleThree"   >
-            <p>{{country3.capital[0]}}</p>
+            <p *ngIf="isCountry3Found">{{country3.capital[0]}}</p>
         </div>
     </div>
 
@@ -98,13 +101,13 @@
             <p>Continents</p>
         </div>
         <div class="comparison-column feature-content titleOne" >
-            <p>{{country1.continents.join(", ")}}</p>
+            <p *ngIf="isCountry1Found">{{country1.continents.join(", ")}}</p>
         </div>
         <div class="comparison-column feature-content centre titleTwo">
-            <p>{{country2.continents.join(", ")}}</p>
+            <p *ngIf="isCountry2Found">{{country2.continents.join(", ")}}</p>
         </div>
         <div class="comparison-column feature-content titleThree"   >
-            <p>{{country3.continents.join(", ")}}</p>
+            <p *ngIf="isCountry3Found">{{country3.continents.join(", ")}}</p>
         </div>
     </div>
 
@@ -117,13 +120,13 @@
             <p id="test-1">Population</p>
         </div>
         <div class="comparison-column feature-content titleOne active" >
-            <p>{{country1.population}}</p>
+            <p *ngIf="isCountry1Found">{{country1.population}}</p>
         </div>
         <div class="comparison-column feature-content centre titleTwo">
-            <p>{{country2.population}}</p>
+            <p *ngIf="isCountry2Found">{{country2.population}}</p>
         </div>
         <div class="comparison-column feature-content titleThree"   >
-            <p>{{country3.population}}</p>
+            <p *ngIf="isCountry3Found">{{country3.population}}</p>
         </div>
     </div>
 
@@ -138,13 +141,13 @@
             <p>Area</p>
         </div>
         <div class="comparison-column feature-content titleOne active" >
-            <p>{{country1.area}} km<sup>2</sup></p>
+            <p *ngIf="isCountry1Found">{{country1.area}} km<sup>2</sup></p>
         </div>
         <div class="comparison-column feature-content centre titleTwo">
-            <p>{{country2.area}} km<sup>2</sup></p>
+            <p *ngIf="isCountry2Found">{{country2.area}} km<sup>2</sup></p>
         </div>
         <div class="comparison-column feature-content titleThree"   >
-            <p>{{country3.area}} km<sup>2</sup></p>
+            <p *ngIf="isCountry3Found">{{country3.area}} km<sup>2</sup></p>
         </div>
     </div>
 
@@ -160,17 +163,17 @@
             <p>Time zones</p>
         </div>
         <div class="comparison-column feature-content titleOne active" >
-            <ul>
+            <ul *ngIf="isCountry1Found">
                 <li *ngFor="let value of country1.timezones">{{ value }}</li>
             </ul>
         </div>
         <div class="comparison-column feature-content centre titleTwo">
-            <ul>
+            <ul *ngIf="isCountry2Found">
                 <li *ngFor="let value of country2.timezones">{{ value }}</li>
             </ul>
         </div>
         <div class="comparison-column feature-content titleThree"   >
-            <ul>
+            <ul *ngIf="isCountry3Found">
                 <li *ngFor="let value of country3.timezones">{{ value }}</li>
             </ul>
         </div>
@@ -187,13 +190,13 @@
             <p>Language</p>
         </div>
         <div class="comparison-column feature-content titleOne active" >
-            <p>{{country1languages.join(", ")}}</p>
+            <p *ngIf="isCountry1Found">{{country1languages.join(", ")}}</p>
         </div>
         <div class="comparison-column feature-content centre titleTwo">
-            <p>{{country2languages.join(", ")}}</p>
+            <p *ngIf="isCountry2Found">{{country2languages.join(", ")}}</p>
         </div>
         <div class="comparison-column feature-content titleThree"   >
-            <p>{{country3languages.join(", ")}}</p>
+            <p *ngIf="isCountry3Found">{{country3languages.join(", ")}}</p>
         </div>
     </div>
 
@@ -207,13 +210,13 @@
             <p>Status</p>
         </div>
         <div class="comparison-column feature-content titleOne active" >
-            <p>{{country1.status}}</p>
+            <p *ngIf="isCountry1Found">{{country1.status}}</p>
         </div>
         <div class="comparison-column feature-content centre titleTwo">
-            <p>{{country2.status}}</p>
+            <p *ngIf="isCountry2Found">{{country2.status}}</p>
         </div>
         <div class="comparison-column feature-content titleThree"   >
-            <p>{{country3.status}}</p>
+            <p *ngIf="isCountry3Found">{{country3.status}}</p>
         </div>
     </div>
 
