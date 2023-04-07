@@ -4,6 +4,7 @@ import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatCardModule} from "@angular/material/card";
 import {MatInputModule} from "@angular/material/input";
 import {MatIconModule} from "@angular/material/icon";
+import {MatAutocompleteModule} from "@angular/material/autocomplete";
 
 @NgModule({
   declarations: [],
@@ -13,12 +14,14 @@ import {MatIconModule} from "@angular/material/icon";
     MatCardModule,
     MatInputModule,
     MatIconModule,
+    MatAutocompleteModule,
   ],
   exports: [
     MatFormFieldModule,
     MatCardModule,
     MatInputModule,
     MatIconModule,
+    MatAutocompleteModule,
   ]
 })
 export class MaterialModule { }
