@@ -2,6 +2,8 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Country} from "../../../shared/models/country";
 import {CountryService} from "../../../shared/services/country-service";
 import {ActivatedRoute, Router} from "@angular/router";
+import { HttpClient } from '@angular/common/http';
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-country-info',
@@ -13,9 +15,9 @@ export class CountryInfoComponent implements OnInit{
   borderCountries : Country[] = []
   languages: string[] = []
   countryName: string = ""
-  constructor( private _countryService: CountryService,private router: Router, private route: ActivatedRoute) {
-
-  }
+  capitalImageUrl: string = ""
+  constructor(private http: HttpClient, private _countryService: CountryService,
+              private router: Router, private route: ActivatedRoute) {}
 
   ngOnInit() {
     this.route.params.subscribe(params => {
@@ -33,6 +35,10 @@ export class CountryInfoComponent implements OnInit{
           this.borderCountries = [];
           this.languages = Object.values(this.country.languages);
 
+          this.searchPhotos(this.country.capital).subscribe((response) => {
+            this.capitalImageUrl = response.photos[Math.round(Math.random() % 10)].src.large;
+          });
+
           for (let i in this.country.borders){
             this._countryService.getCountryDetailsByCode(this.country.borders[i]).subscribe({
               next: (details) => {
@@ -49,6 +55,13 @@ export class CountryInfoComponent implements OnInit{
         alert("Country does not exist")
       }
     } )
+  }
+
+  searchPhotos(query: string) : Observable<any> {
+    const apiKey = '';
+    const url = `https://api.pexels.com/v1/search?query=${query}&per_page=10`;
+    const headers = { Authorization: apiKey };
+    return this.http.get(url, { headers });
   }
 
   goToPage(countryName: String) {

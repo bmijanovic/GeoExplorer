@@ -50,7 +50,7 @@ export class CountryMapComponent implements OnInit, OnDestroy{
   }
 
   showRelation(relationId: number) {
-    const query = `  [out:json];
+    const query = `[out:json];
     relation(${relationId});
     out body;
     >;

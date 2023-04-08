@@ -1,45 +1,46 @@
-<mat-card class="card-bg shadow-lg p-4" *ngIf="country != null">
+<mat-card class="card-bg shadow-md p-3 p-md-4" *ngIf="country != null">
   <div class="container">
 
-    <div class="row mb-5 mb-md-3">
+    <div class="row mb-3">
       <div class="col-md-6"></div>
       <div class="col-md-6">
         <div class="d-flex flex-column justify-content-center align-items-center">
-          <h5 class="text-lowercase">Flag</h5>
-          <img src="{{country.flag_png}}" class="flag" alt="Flag">
+          <h5 class="text-lowercase mb-2">Flag</h5>
+          <img src="{{country.flag_png}}" class="col-img" alt="Flag">
         </div>
       </div>
     </div>
 
-    <div class="row mb-5 mb-md-3">
+    <div class="row mb-3">
       <div class="col-md-6">
         <div class="d-flex justify-content-center">
           <div class="d-flex flex-column justify-content-center align-items-center">
-            <h5 class="text-lowercase">Coat of arms</h5>
-            <img src="{{country.coat_of_arm}}" class="flag" alt="Coat of arm">
+            <h5 class="text-lowercase mb-2">Coat of arms</h5>
+            <img src="{{country.coat_of_arm}}" class="col-img" alt="Coat of arm">
           </div>
         </div>
       </div>
       <div class="col-md-6"></div>
     </div>
 
-    <div class="row mb-5 mb-md-3">
+    <div class="row mb-3">
       <div class="col-md-6"></div>
       <div class="col-md-6">
         <div class="d-flex justify-content-center">
           <div class="d-flex flex-column justify-content-center align-items-center">
-            <h5 class="text-lowercase">Capital city</h5>
+            <h5 class="text-lowercase mb-1">Capital city</h5>
             <h4 style="font-size:50px">{{country.capital}}</h4>
+            <img src="{{capitalImageUrl}}" class="col-img" style="max-height: 70%;max-width: 70%" alt="Flag">
           </div>
         </div>
       </div>
     </div>
 
-    <div class="row mb-5 mb-md-3">
+    <div class="row mb-3">
       <div class="col-md-6">
         <div class="d-flex justify-content-center">
           <div class="d-flex flex-column justify-content-center align-items-center">
-            <h5 class="text-lowercase">Continents</h5>
+            <h5 class="text-lowercase mb-1">Continents</h5>
             <h4 style="font-size:50px">{{country.continents}}</h4>
           </div>
         </div>
@@ -47,14 +48,14 @@
       <div class="col-md-6"></div>
     </div>
 
-    <mat-divider class="divider mt-3 mx-3 mx-lg-5"></mat-divider>
+    <mat-divider class="divider mt-3 mx-3 mx-md-5"></mat-divider>
 
-    <div class="row mb-3 mx-lg-3">
-      <div class="col-12 d-flex flex-column justify-content-center">
+    <div class="row mb-3 mx-md-3">
+      <div class="col-12 d-flex flex-column">
         <h5 class="align-self-center mt-3">neighbours</h5>
-        <div class="overflow-auto mx-0 mx-lg-5">
+        <div class="overflow-auto mx-0 mx-md-5">
           <ul class="p-0 m-0 text-center" style="list-style: none">
-            <li *ngFor="let borderCountry of borderCountries" class="d-inline-block m-1 m-lg-3">
+            <li *ngFor="let borderCountry of borderCountries" class="d-inline-block m-1 m-md-3">
               <img src="{{borderCountry.flag_png}}" class="border-flag rounded-circle" alt="Flag"
                    matTooltip="{{borderCountry.common_name}}"
                    (click)="goToPage(borderCountry.common_name)">
@@ -64,47 +65,58 @@
       </div>
     </div>
 
-    <mat-divider class="divider mb-3 mx-3 mx-lg-5"></mat-divider>
+    <mat-divider class="divider mb-3 mx-3 mx-md-5"></mat-divider>
 
-    <div class="row p-2 p-lg-5">
-      <div class="col-md-6">
-        <div class="row mb-2">
-          <div class="d-flex flex-column justify-content-center align-items-center">
-            <p class="text-lowercase m-0">Population</p>
-            <p class="m-0 fw-bold">{{country.population}}</p>
-          </div>
-        </div>
-
-        <div class="row mb-2">
-          <div class="d-flex flex-column justify-content-center align-items-center">
-            <p class="text-lowercase m-0">Area</p>
-            <p class="m-0 fw-bold">{{country.area}}</p>
-          </div>
-        </div>
-
-        <div class="row mb-2">
-          <div class="d-flex flex-column justify-content-center align-items-center">
-            <p class="text-lowercase m-0">Time zones</p>
-            <p class="m-0 p-0 fw-bold" *ngFor="let timezone of country.timezones">{{ timezone }}</p>
-          </div>
-        </div>
-
-        <div class="row mb-2">
-          <div class="d-flex flex-column justify-content-center align-items-center">
-            <p class="text-lowercase m-0">Languages</p>
-            <p class="m-0 fw-bold" *ngFor="let language of languages">{{language}}</p>
-          </div>
-        </div>
-
+    <div class="row p-2 p-md-5">
+      <div class="col-md-3 ">
         <div class="row">
-          <div class="d-flex flex-column justify-content-center align-items-center">
-            <p class="text-lowercase m-0">Independent</p>
-            <p class="m-0 fw-bold">{{ country.is_independent ? "Yes" : "No" }}</p>
+          <div class="col-6 col-md-12">
+            <div class="d-flex flex-column mb-3">
+              <div class="d-inline-flex">
+                <p class="text-lowercase m-0 mb-1">Population</p>
+                <mat-icon class="ms-1">person</mat-icon>
+              </div>
+              <p class="m-0 fw-bold">{{country.population}}</p>
+            </div>
+
+            <div class="d-flex flex-column mb-3">
+              <div class="d-inline-flex">
+                <p class="text-lowercase m-0 mb-1">Area</p>
+                <mat-icon class="ms-1">border_all</mat-icon>
+              </div>
+              <p class="m-0 fw-bold">{{country.area}} km<sup>2</sup></p>
+            </div>
+
+            <div class="d-flex flex-column mb-3">
+              <div class="d-inline-flex">
+                <p class="text-lowercase m-0 mb-1">Time zones</p>
+                <mat-icon class="ms-1">access_time</mat-icon>
+              </div>
+              <p class="m-0 p-0 fw-bold" *ngFor="let timezone of country.timezones">{{ timezone }}</p>
+            </div>
+          </div>
+
+          <div class="col-6 col-md-12">
+            <div class="d-flex flex-column mb-3">
+              <div class="d-inline-flex">
+                <p class="text-lowercase m-0 mb-1">Languages</p>
+                <mat-icon class="ms-1">language</mat-icon>
+              </div>
+              <p class="m-0 fw-bold" *ngFor="let language of languages">{{language}}</p>
+            </div>
+
+            <div class="d-flex flex-column">
+              <div class="d-inline-flex">
+                <p class="text-lowercase m-0 mb-1">Independent</p>
+                <mat-icon class="ms-1">flag</mat-icon>
+              </div>
+              <p class="m-0 fw-bold">{{ country.is_independent ? "Yes" : "No" }}</p>
+            </div>
           </div>
         </div>
       </div>
 
-      <div class="col-md-6">
+      <div class="col-md-9 country-map">
         <app-country-map class="p-0" [country]="country"></app-country-map>
       </div>
     </div>
