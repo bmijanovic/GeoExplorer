@@ -14,7 +14,11 @@ export class CountryService {
     constructor(private http: HttpClient) {}
 
     getCountryDetails(name: string): Observable<any> {
-        return this.http.get<any>(`${this.url}/name/${name}`);
+        return this.http.get<any>(`${this.url}/name/${name}?fullText=true`);
+    }
+
+    getCountryDetailsByCode(code: string): Observable<any> {
+      return this.http.get<any>(`${this.url}/alpha/${code}`);
     }
 
     getAllCountries(): Observable<any[]> {
@@ -33,7 +37,8 @@ export class CountryService {
             timezones: details.timezones,
             languages: details.languages,
             is_independent: details.independent,
-            status: details.status
+            status: details.status,
+            borders: details.borders
         }
         return country;
     }

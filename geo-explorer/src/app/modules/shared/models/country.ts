@@ -9,6 +9,6 @@ export interface Country {
     timezones: string[],
     languages: any,
     is_independent: boolean,
-    status: string
-
+    status: string,
+    borders: string[]
 }

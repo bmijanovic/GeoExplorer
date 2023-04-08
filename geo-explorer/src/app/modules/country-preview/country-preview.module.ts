@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {CommonModule, NgOptimizedImage} from '@angular/common';
 import { CountryPreviewComponent } from './page/country-preview.component';
 import {SharedModule} from "../shared/shared.module";
+import {RouterLink} from "@angular/router";
 
 
 
@@ -11,7 +12,9 @@ import {SharedModule} from "../shared/shared.module";
   ],
   imports: [
     CommonModule,
-    SharedModule
+    SharedModule,
+    NgOptimizedImage,
+    RouterLink
   ]
 })
 export class CountryPreviewModule { }
