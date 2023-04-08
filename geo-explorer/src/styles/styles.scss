@@ -1,6 +1,4 @@
 /* You can add global styles to this file, and also import other style files */
-@import "node_modules/leaflet/dist/leaflet.css";
-
 :root {
   --DarkGreen: #94AF9F;
   --Lime: #DBE4C6;
@@ -12,3 +10,7 @@ html, body {
   background-color: var(--Lime);
 }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.leaflet-default-icon-path {
+  background-image: url(https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon.png);
+}

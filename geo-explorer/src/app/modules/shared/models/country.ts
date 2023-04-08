@@ -10,5 +10,6 @@ export interface Country {
     languages: any,
     is_independent: boolean,
     status: string,
-    borders: string[]
+    borders: string[],
+    map_relation_id: number
 }

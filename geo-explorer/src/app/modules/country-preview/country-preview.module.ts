@@ -5,13 +5,15 @@ import {SharedModule} from "../shared/shared.module";
 import {RouterLink} from "@angular/router";
 import { CountryMapComponent } from './components/country-map/country-map.component';
 import {LeafletModule} from "@asymmetrik/ngx-leaflet";
+import { CountryInfoComponent } from './components/country-info/country-info.component';
 
 
 
 @NgModule({
   declarations: [
     CountryPreviewComponent,
-    CountryMapComponent
+    CountryMapComponent,
+    CountryInfoComponent
   ],
     imports: [
         CommonModule,

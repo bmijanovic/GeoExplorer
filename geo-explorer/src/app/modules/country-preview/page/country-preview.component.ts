@@ -10,46 +10,12 @@ import {Country} from "../../shared/models/country";
 })
 
 export class CountryPreviewComponent implements OnInit{
-  country: Country | undefined
-  borderCountries : Country[] = []
-  languages: string[] = []
-  constructor(private _countryService: CountryService, private route: ActivatedRoute, private router: Router)  {
+  countryName: string = ""
+  constructor(private route: ActivatedRoute)  {
   }
   ngOnInit() {
     this.route.params.subscribe(params => {
-      const countryName = params['countryName'];
-      this.loadCountryDetails(countryName);
+      this.countryName = params['countryName'];
     });
-  }
-
-  loadCountryDetails(countryName: string) {
-    this._countryService.getCountryDetails(countryName).subscribe({
-      next: (details) => {
-        if(details != null)
-        {
-          this.country = this._countryService.parseToCountry(details[0]);
-          this.borderCountries = [];
-          this.languages = Object.values(this.country.languages);
-
-          for (let i in this.country.borders){
-            this._countryService.getCountryDetailsByCode(this.country.borders[i]).subscribe({
-              next: (details) => {
-                this.borderCountries.push(this._countryService.parseToCountry(details[0]));
-              },
-              error: (err) => {
-                alert("Country does not exist")
-              }
-            });
-          }
-        }
-      },
-      error: (err) => {
-        alert("Country does not exist")
-      }
-    } )
-  }
-
-  goToPage(countryName: String) {
-    this.router.navigate(['/country', countryName])
   }
 }

@@ -38,7 +38,8 @@ export class CountryService {
             languages: details.languages,
             is_independent: details.independent,
             status: details.status,
-            borders: details.borders
+            borders: details.borders,
+            map_relation_id: Number(details.maps['openStreetMaps'].split("/").slice(-1)[0])
         }
         return country;
     }
