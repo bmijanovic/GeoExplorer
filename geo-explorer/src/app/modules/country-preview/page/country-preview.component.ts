@@ -12,6 +12,7 @@ import {Country} from "../../shared/models/country";
 export class CountryPreviewComponent implements OnInit{
   country: Country | undefined
   borderCountries : Country[] = []
+  languages: string[] = []
   constructor(private _countryService: CountryService, private route: ActivatedRoute, private router: Router)  {
   }
   ngOnInit() {
@@ -28,20 +29,22 @@ export class CountryPreviewComponent implements OnInit{
         {
           this.country = this._countryService.parseToCountry(details[0]);
           this.borderCountries = [];
+          this.languages = Object.values(this.country.languages);
+
           for (let i in this.country.borders){
             this._countryService.getCountryDetailsByCode(this.country.borders[i]).subscribe({
               next: (details) => {
                 this.borderCountries.push(this._countryService.parseToCountry(details[0]));
               },
               error: (err) => {
-                //alert("Country does not exist")
+                alert("Country does not exist")
               }
             });
           }
         }
       },
       error: (err) => {
-        //alert("Country does not exist")
+        alert("Country does not exist")
       }
     } )
   }
