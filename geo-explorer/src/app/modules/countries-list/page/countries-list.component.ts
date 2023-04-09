@@ -1,10 +1,12 @@
-import {Component, EventEmitter, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, EventEmitter, OnInit, ViewChild} from '@angular/core';
 import {FormControl, FormGroup} from "@angular/forms";
 import {animate, AUTO_STYLE, state, style, transition, trigger} from "@angular/animations";
 import {map, Observable, startWith} from "rxjs";
 import {CountryService} from "../../shared/services/country-service";
 import {CountryListItem} from "../../countries-compare/components/comparison-search/comparison-search.component";
 import {inputNames} from "@angular/cdk/schematics";
+import {MatPaginator} from "@angular/material/paginator";
+import {MatTableDataSource} from "@angular/material/table";
 
 
 export interface CountryListItemDetailed{
@@ -43,23 +45,42 @@ export class CountriesListComponent implements  OnInit{
   filteredOptions!: Observable<CountryListItemDetailed[]>;
   countryEvent = new EventEmitter<string>();
 
-  myControl = new FormControl<string | CountryListItemDetailed>('');
+  myControl = new FormControl<string>('');
   sortInput= new FormControl('Name');
   continentsSelected=new FormControl("");
 
   queryInput= new FormControl("");
+  minPopulationInput= new FormControl(null);
+  maxPopulationInput= new FormControl(null);
+
+  minAreaInput= new FormControl(null);
+  maxAreaInput= new FormControl(null);
   searchForm=new FormGroup(
     {
       sort:this.sortInput,
-      name:this.queryInput
+      name:this.queryInput,
+      minPop:this.minPopulationInput,
+      maxPop:this.maxPopulationInput,
+      minArea:this.minAreaInput,
+      maxArea:this.maxAreaInput,
+      continents:this.continentsSelected,
     }
   )
-  minPopulationInput= new FormControl("");
-  maxPopulationInput= new FormControl("");
-  constructor(
+
+  sss: any;
+  isIndependent=true;
+  isNotIndependent=true;
+  @ViewChild(MatPaginator) paginator: MatPaginator | undefined;
+  obs: Observable<any> | undefined;
+  dataSource: MatTableDataSource<CountryListItemDetailed> = new MatTableDataSource<CountryListItemDetailed>(this.filteredCountries)
+  constructor(private changeDetectorRef: ChangeDetectorRef,
     private countryService: CountryService
   ) {}
+  @ViewChild('ridesPaginator') ridesPaginator!: MatPaginator;
+  ngAfterViewInit(){
 
+    this.dataSource.paginator = this.ridesPaginator;
+  }
 
   changeDirection() {
     if (this.sortDirection=="arrow_upward")
@@ -95,16 +116,11 @@ export class CountriesListComponent implements  OnInit{
               flag:countries[i].flags.png,
               continent:countries[i].continents[0]})
         this.filteredCountries=this.options;
+        this.filteredCountries.sort(this.compareNameAsc)
       }
     })
-    this.filteredOptions = this.myControl.valueChanges.pipe(
-      startWith(''),
-      map(value => {
-        const name = typeof value === 'string' ? value : value?.name;
-        this.sendMessage(name!)
-        return name ? this._filter(name as string) : this.options.slice();
-      }),
-    );
+
+
   }
   private _filter(name: string): CountryListItemDetailed[] {
     const filterValue = name.toLowerCase();
@@ -116,13 +132,25 @@ export class CountriesListComponent implements  OnInit{
     this.countryEvent.emit(name);
   }
   filterCountries(){
-    const filterValue = this.queryInput.value?.toLowerCase();
-    if (filterValue!=null)
-      this.filteredCountries= this.options.filter(option => option.name.toLowerCase().includes(filterValue));
-    if (this.continentsSelected.value!="")
-      this.filteredCountries=this.options.filter(option=>this.continentsSelected.value?.includes(option.continent));
-   /* if (this.minPopulationInput.value!="" && this.minPopulationInput!=null)
-      this.filteredCountries=this.options.filter(option=>option.population>parseInt(this.minPopulationInput.value));*/
+    let filterValue="";
+    if (typeof this.myControl.value === "string")
+      filterValue=this.myControl.value.toLowerCase();
+    this.filteredCountries=this.options
+    if (filterValue!=null && filterValue!=undefined && filterValue!="") {
+      this.filteredCountries = this.filteredCountries.filter(option => option.name.toLowerCase().includes(filterValue));
+    }
+    console.log(this.continentsSelected.value?.length)
+    if (this.continentsSelected.value?.length!=0 &&this.continentsSelected.value!=undefined){
+      this.filteredCountries=this.filteredCountries.filter(option=>this.continentsSelected.value?.includes(option.continent));
+    }
+    if (this.minPopulationInput.value!=null)
+      this.filteredCountries=this.filteredCountries.filter(option=>option.population>=parseInt(this.minPopulationInput.value!));
+    if (this.maxPopulationInput.value!=null)
+      this.filteredCountries=this.filteredCountries.filter(option=>option.population<=parseInt(this.maxPopulationInput.value!));
+    if (!this.isIndependent)
+      this.filteredCountries=this.filteredCountries.filter(option=> !option.independent);
+    if (!this.isNotIndependent)
+      this.filteredCountries=this.filteredCountries.filter(option=> option.independent);
   }
 
   displayFn(user: CountryListItem): string {
@@ -245,5 +273,20 @@ export class CountriesListComponent implements  OnInit{
           break;
       }
     }
+  }
+
+  clearSearch() {
+    this.myControl.reset();
+  }
+
+  isSearchBlank() :boolean{
+    return !(this.myControl.value == "" || this.myControl.value == null);
+  }
+
+  resetFilters() {
+    this.isIndependent=true;
+    this.isNotIndependent=true;
+    this.searchForm.reset();
+    this.filterCountries();
   }
 }

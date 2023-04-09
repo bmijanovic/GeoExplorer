@@ -9,6 +9,7 @@ import {MatOptionModule} from "@angular/material/core";
 import {MatSelectModule} from "@angular/material/select";
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import {MatDividerModule} from "@angular/material/divider";
+import {MatPaginatorModule} from "@angular/material/paginator";
 
 @NgModule({
   declarations: [],
@@ -22,6 +23,7 @@ import {MatDividerModule} from "@angular/material/divider";
     MatOptionModule,
     MatSelectModule,
     MatCheckboxModule,
+    MatPaginatorModule
   ],
   exports: [
     MatFormFieldModule,
@@ -32,6 +34,7 @@ import {MatDividerModule} from "@angular/material/divider";
     MatOptionModule,
     MatSelectModule,
     MatCheckboxModule,
+    MatPaginatorModule
   ]
 
 })
