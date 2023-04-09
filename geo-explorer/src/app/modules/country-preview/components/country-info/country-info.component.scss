@@ -10,24 +10,36 @@
   object-fit: cover;
 }
 
-.col-coat-img{
+.col-capital-img{
   border-radius: 20px;
-  width: 200px;
+  width: 600px;
   object-fit: cover;
 }
 
-.col-capital-img{
-  border-radius: 20px;
-  width: 300px;
-  object-fit: cover;
+.mobile-visibility{
+  display:none;
+}
+
+@media only screen and (max-width: 768px) {
+  .col-capital-img{
+    width: 300px;
+  }
+
+  .mobile-visibility{
+    display:block;
+  }
 }
 
 h1, h2, h3, h4, h5, p{
   font-family: 'Poppins', sans-serif;
 }
 
+h2{
+  font-size:55px
+}
+
 h5{
-  font-size: 25px;
+  font-size: 30px;
 }
 
 .card-bg{

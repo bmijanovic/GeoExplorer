@@ -1,6 +1,7 @@
 export interface Country {
     common_name: string,
     flag_png: string,
+    flag_alt: string,
     coat_of_arm: string,
     capital: string,
     continents: string[],

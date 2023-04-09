@@ -29,6 +29,7 @@ export class CountryService {
         let country = <Country>{
             common_name: details.name.common,
             flag_png: details.flags.png,
+            flag_alt: details.flags.alt,
             coat_of_arm: details.coatOfArms.png,
             capital: details.capital,
             continents: details.continents,

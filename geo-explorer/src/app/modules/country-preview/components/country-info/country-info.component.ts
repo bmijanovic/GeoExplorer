@@ -1,8 +1,8 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Country} from "../../../shared/models/country";
 import {CountryService} from "../../../shared/services/country-service";
 import {ActivatedRoute, Router} from "@angular/router";
-import { HttpClient } from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {Observable} from "rxjs";
 
 @Component({
@@ -11,18 +11,17 @@ import {Observable} from "rxjs";
   styleUrls: ['./country-info.component.scss']
 })
 export class CountryInfoComponent implements OnInit{
-  public country: Country | undefined;
+  country: Country | undefined;
   borderCountries : Country[] = []
   languages: string[] = []
-  countryName: string = ""
   capitalImageUrl: string = ""
   constructor(private http: HttpClient, private _countryService: CountryService,
               private router: Router, private route: ActivatedRoute) {}
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      this.countryName = params['countryName'];
-      this.loadCountryDetails(this.countryName);
+      const countryName = params['countryName'];
+      this.loadCountryDetails(countryName);
     });
   }
 
@@ -36,7 +35,7 @@ export class CountryInfoComponent implements OnInit{
           this.languages = Object.values(this.country.languages);
 
           this.searchPhotos(this.country.capital).subscribe((response) => {
-            this.capitalImageUrl = response.photos[Math.round(Math.random() % 10)].src.large;
+            this.capitalImageUrl = response.photos[Math.floor(Math.random() * 20)].src.landscape;
           });
 
           for (let i in this.country.borders){
@@ -59,7 +58,7 @@ export class CountryInfoComponent implements OnInit{
 
   searchPhotos(query: string) : Observable<any> {
     const apiKey = '';
-    const url = `https://api.pexels.com/v1/search?query=${query}&per_page=10`;
+    const url = `https://api.pexels.com/v1/search?query=${query}&orientation=landscape&per_page=20`;
     const headers = { Authorization: apiKey };
     return this.http.get(url, { headers });
   }
@@ -69,4 +68,6 @@ export class CountryInfoComponent implements OnInit{
       window.location.reload();
     });
   }
+
+  protected readonly window = window;
 }
