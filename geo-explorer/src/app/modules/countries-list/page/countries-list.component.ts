@@ -38,7 +38,7 @@ export class CountriesListComponent implements  OnInit{
   criteriums=["Name","Population","Area","Continent"];
   advancedSearchIcon="tune"
   collapsed=true
-  continents= ["Europe","Asia","North America","South America","Africa","Antartica"];
+  continents= ["Europe","Asia","North America","South America","Africa","Antartica","Oceania"];
 
   options: CountryListItemDetailed[] = [];
   filteredCountries:CountryListItemDetailed[]=[];
@@ -56,7 +56,6 @@ export class CountriesListComponent implements  OnInit{
   maxAreaInput= new FormControl(null);
   searchForm=new FormGroup(
     {
-      sort:this.sortInput,
       name:this.queryInput,
       minPop:this.minPopulationInput,
       maxPop:this.maxPopulationInput,
@@ -130,11 +129,12 @@ export class CountriesListComponent implements  OnInit{
     if (typeof this.myControl.value === "string")
       filterValue=this.myControl.value.toLowerCase();
     this.filteredCountries=this.options
+    this.sortCountries();
     if (filterValue!=null && filterValue!=undefined && filterValue!="") {
       this.filteredCountries = this.filteredCountries.filter(option => option.name.toLowerCase().includes(filterValue));
     }
-    console.log(this.continentsSelected.value?.length)
-    if (this.continentsSelected.value?.length!=0 &&this.continentsSelected.value!=undefined){
+    console.log(this.filteredCountries.length)
+    if (this.continentsSelected.value?.length!=0 &&this.continentsSelected.value!=undefined && this.continentsSelected!=null){
       this.filteredCountries=this.filteredCountries.filter(option=>this.continentsSelected.value?.includes(option.continent));
     }
     if (this.minPopulationInput.value!=null)

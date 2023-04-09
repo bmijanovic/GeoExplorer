@@ -2,7 +2,7 @@
 <form [formGroup]="searchForm">
   <div class="d-flex justify-content-between mx-4 mt-3">
     <div class="w-100 d-flex justify-content-center">
-      <mat-form-field id="searchFormField"  appearance="outline" style="width: 40%;"  >
+      <mat-form-field id="searchFormField" appearance="outline" style="width: 40%;min-width: 300px;"  >
         <mat-label>Search</mat-label>
         <input matInput placeholder="Enter country name.. " (input)="filterCountries()" [formControl]="myControl"
                 style="color: black">
@@ -84,13 +84,13 @@
     <div>
     <mat-form-field id="sortCriteriumFormField" appearance="outline" style="color: black;">
       <mat-label>Sort Criterium</mat-label>
-      <mat-select [formControl]="sortInput"  (selectionChange)="sortCountries();filterCountries()">
+      <mat-select [formControl]="sortInput"  (selectionChange)="filterCountries()">
         <mat-option *ngFor="let criteria of criteriums" [value]="criteria">
           {{criteria}}
         </mat-option>
       </mat-select>
     </mat-form-field>
-    <mat-icon id="sortDirectionIcon" (click)="changeDirection();sortCountries();filterCountries()" class="mx-3" style="vertical-align: middle">{{sortDirection}}</mat-icon>
+    <mat-icon id="sortDirectionIcon" (click)="changeDirection();filterCountries()" class="mx-3" style="vertical-align: middle">{{sortDirection}}</mat-icon>
     </div>
   </div>
 </form>

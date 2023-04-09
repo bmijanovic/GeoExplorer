@@ -6,6 +6,8 @@ import {MaterialModule} from "../../../infrastructure/material.module";
 import {ReactiveFormsModule} from "@angular/forms";
 import { CountryCardComponent } from './components/country-card/country-card.component';
 import {MatButtonModule} from "@angular/material/button";
+import {RouterLink} from "@angular/router";
+import {MatTooltipModule} from "@angular/material/tooltip";
 
 
 
@@ -19,7 +21,9 @@ import {MatButtonModule} from "@angular/material/button";
         SharedModule,
         MaterialModule,
         ReactiveFormsModule,
-        MatButtonModule
+        MatButtonModule,
+        RouterLink,
+        MatTooltipModule
     ]
 })
 export class CountriesListModule { }
