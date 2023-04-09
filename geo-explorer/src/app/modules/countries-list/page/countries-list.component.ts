@@ -1,11 +1,11 @@
 import {ChangeDetectorRef, Component, EventEmitter, OnInit, ViewChild} from '@angular/core';
 import {FormControl, FormGroup} from "@angular/forms";
 import {animate, AUTO_STYLE, state, style, transition, trigger} from "@angular/animations";
-import {map, Observable, startWith} from "rxjs";
+import {BehaviorSubject, map, Observable, startWith} from "rxjs";
 import {CountryService} from "../../shared/services/country-service";
 import {CountryListItem} from "../../countries-compare/components/comparison-search/comparison-search.component";
 import {inputNames} from "@angular/cdk/schematics";
-import {MatPaginator} from "@angular/material/paginator";
+import {MatPaginator, PageEvent} from "@angular/material/paginator";
 import {MatTableDataSource} from "@angular/material/table";
 
 
@@ -42,8 +42,7 @@ export class CountriesListComponent implements  OnInit{
 
   options: CountryListItemDetailed[] = [];
   filteredCountries:CountryListItemDetailed[]=[];
-  filteredOptions!: Observable<CountryListItemDetailed[]>;
-  countryEvent = new EventEmitter<string>();
+  previewCountries:CountryListItemDetailed[]=[];
 
   myControl = new FormControl<string>('');
   sortInput= new FormControl('Name');
@@ -70,12 +69,16 @@ export class CountriesListComponent implements  OnInit{
   sss: any;
   isIndependent=true;
   isNotIndependent=true;
-  @ViewChild(MatPaginator) paginator: MatPaginator | undefined;
-  obs: Observable<any> | undefined;
-  dataSource: MatTableDataSource<CountryListItemDetailed> = new MatTableDataSource<CountryListItemDetailed>(this.filteredCountries)
-  constructor(private changeDetectorRef: ChangeDetectorRef,
-    private countryService: CountryService
-  ) {}
+
+  dataSource= new MatTableDataSource<CountryListItemDetailed>();
+  totalRows = 0;
+  pageSize = 5;
+  currentPage = 0;
+  pageSizeOptions: number[] = [5, 10, 25, 100];
+  obs:  BehaviorSubject<CountryListItemDetailed[]>;
+  constructor(private changeDetectorRef: ChangeDetectorRef, private countryService: CountryService) {
+    this.obs = this.dataSource.connect();
+  }
   @ViewChild('ridesPaginator') ridesPaginator!: MatPaginator;
   ngAfterViewInit(){
 
@@ -116,21 +119,12 @@ export class CountriesListComponent implements  OnInit{
               flag:countries[i].flags.png,
               continent:countries[i].continents[0]})
         this.filteredCountries=this.options;
-        this.filteredCountries.sort(this.compareNameAsc)
+        this.filteredCountries.sort(this.compareNameAsc);
+        this.filterCountries();
       }
     })
-
-
-  }
-  private _filter(name: string): CountryListItemDetailed[] {
-    const filterValue = name.toLowerCase();
-    this.filteredCountries= this.options.filter(option => option.name.toLowerCase().includes(filterValue));
-    return this.filteredCountries
   }
 
-  sendMessage(name:string) {
-    this.countryEvent.emit(name);
-  }
   filterCountries(){
     let filterValue="";
     if (typeof this.myControl.value === "string")
@@ -151,21 +145,12 @@ export class CountriesListComponent implements  OnInit{
       this.filteredCountries=this.filteredCountries.filter(option=> !option.independent);
     if (!this.isNotIndependent)
       this.filteredCountries=this.filteredCountries.filter(option=> option.independent);
-  }
-
-  displayFn(user: CountryListItem): string {
-    return user && user.name ? user.name : '';
-  }
-  displayPopulation(num:number){
-    if (num>1000000 && num<1000000000)
-      return Math.round(num/100000)/10+"M";
-    else if (num>1000000000)
-      return Math.round(num/100000000)/10+"B";
-    else if (num>0 && num<1000)
-      return num;
-    else
-      return Math.round(num/100)/10+"K";
-
+    this.previewCountries=this.filteredCountries.slice(this.pageSize*this.currentPage,this.pageSize*this.currentPage+this.pageSize);
+    this.dataSource.data = this.previewCountries;
+    setTimeout(() => {
+      this.ridesPaginator.pageIndex = this.currentPage;
+      this.ridesPaginator.length = this.filteredCountries.length;
+    });
   }
   compareNameAsc( a:CountryListItemDetailed, b:CountryListItemDetailed ) {
     if ( a.name < b.name ){
@@ -287,6 +272,11 @@ export class CountriesListComponent implements  OnInit{
     this.isIndependent=true;
     this.isNotIndependent=true;
     this.searchForm.reset();
+    this.filterCountries();
+  }
+  pageChanged(event: PageEvent) {
+    this.pageSize = event.pageSize;
+    this.currentPage = event.pageIndex;
     this.filterCountries();
   }
 }

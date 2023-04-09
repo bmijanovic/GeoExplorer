@@ -43,3 +43,11 @@
   border-radius: 5px;
   margin-bottom: 10px;
 }
+
+::ng-deep .mat-mdc-paginator-container{
+  color: black!important;
+}
+
+::ng-deep .mat-mdc-paginator-container svg{
+  fill: black!important;
+}
