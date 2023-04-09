@@ -22,7 +22,6 @@ import {MatDividerModule} from "@angular/material/divider";
     MatOptionModule,
     MatSelectModule,
     MatCheckboxModule,
-    MatDividerModule
   ],
   exports: [
     MatFormFieldModule,
@@ -33,7 +32,6 @@ import {MatDividerModule} from "@angular/material/divider";
     MatOptionModule,
     MatSelectModule,
     MatCheckboxModule,
-    MatDividerModule
   ]
 
 })
