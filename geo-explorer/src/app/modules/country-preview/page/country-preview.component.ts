@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, HostListener, OnInit} from '@angular/core';
 import {CountryService} from "../../shared/services/country-service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Country} from "../../shared/models/country";
@@ -17,5 +17,10 @@ export class CountryPreviewComponent implements OnInit{
     this.route.params.subscribe(params => {
       this.countryName = params['countryName'];
     });
+  }
+
+  @HostListener('window:popstate', ['$event'])
+  onPopState() {
+    location.reload();
   }
 }
