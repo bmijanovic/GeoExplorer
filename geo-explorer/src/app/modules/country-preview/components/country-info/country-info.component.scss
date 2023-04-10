@@ -20,16 +20,6 @@
   display:none;
 }
 
-@media only screen and (max-width: 768px) {
-  .col-capital-img{
-    width: 300px;
-  }
-
-  .mobile-visibility{
-    display:block;
-  }
-}
-
 h1, h2, h3, h4, h5, p{
   font-family: 'Poppins', sans-serif;
 }
@@ -59,4 +49,14 @@ h5{
 
 .country-map{
   min-height: 350px;
+}
+
+@media only screen and (max-width: 768px) {
+  .col-capital-img{
+    width: 300px;
+  }
+
+  .mobile-visibility{
+    display:block;
+  }
 }

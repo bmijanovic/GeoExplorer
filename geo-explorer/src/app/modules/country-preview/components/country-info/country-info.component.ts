@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Country} from "../../../shared/models/country";
 import {CountryService} from "../../../shared/services/country-service";
 import {ActivatedRoute, Router} from "@angular/router";
@@ -15,14 +15,13 @@ export class CountryInfoComponent implements OnInit{
   borderCountries : Country[] = []
   languages: string[] = []
   capitalImageUrl: string = ""
+  @Input()
+  countryName : string = ""
   constructor(private http: HttpClient, private _countryService: CountryService,
               private router: Router, private route: ActivatedRoute) {}
 
   ngOnInit() {
-    this.route.params.subscribe(params => {
-      const countryName = params['countryName'];
-      this.loadCountryDetails(countryName);
-    });
+    this.loadCountryDetails(this.countryName);
   }
 
   loadCountryDetails(countryName: string) {
@@ -35,7 +34,7 @@ export class CountryInfoComponent implements OnInit{
           this.languages = Object.values(this.country.languages);
 
           this.searchPhotos(this.country.capital).subscribe((response) => {
-            this.capitalImageUrl = response.photos[Math.floor(Math.random() * 20)].src.landscape;
+            this.capitalImageUrl = response.photos[Math.floor(Math.random() * 20) % response.photos.length].src.landscape;
           });
 
           for (let i in this.country.borders){
@@ -57,9 +56,9 @@ export class CountryInfoComponent implements OnInit{
   }
 
   searchPhotos(query: string) : Observable<any> {
-    const apiKey = '';
+    const pexels_api_key = 'qHBdVvMNzr6H3yPnnLLcaP9YA9j4tbcTrJNQjTygYRzmaJoaS76filmn';
     const url = `https://api.pexels.com/v1/search?query=${query}&orientation=landscape&per_page=20`;
-    const headers = { Authorization: apiKey };
+    const headers = { Authorization: pexels_api_key };
     return this.http.get(url, { headers });
   }
 
