@@ -1,1 +1,6 @@
-<p>country-preview works!</p>
+<div class="header d-flex justify-content-center shadow-sm">
+  <h1 class="align-self-center m-0 text-uppercase fw-bold">{{countryName}}</h1>
+</div>
+<div class="container mt-5" *ngIf="countryName != ''">
+  <app-country-info [countryName]="countryName"></app-country-info>
+</div>

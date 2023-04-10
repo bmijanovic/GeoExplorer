@@ -6,13 +6,13 @@ import {CountryPreviewComponent} from "../app/modules/country-preview/page/count
 
 const routes: Routes = [
   {path: 'home', component: CountriesListComponent},
-  {path: 'country/:countryId', component: CountryPreviewComponent},
+  {path: 'country/:countryName', component: CountryPreviewComponent},
   {path: 'compare', component: CountriesCompareComponent},
   {path: '**',  redirectTo: '/home'}
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {scrollPositionRestoration: 'enabled'})],
   exports: [RouterModule]
 })
 export class AppRoutingModule {
