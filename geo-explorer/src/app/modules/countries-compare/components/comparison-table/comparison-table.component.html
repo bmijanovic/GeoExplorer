@@ -4,26 +4,36 @@
 
 <!--HEADER-->
 <div class="comparison-table">
-    <div class="comparison-header">
+    <div class="comparison-header sticky lime-background">
         <div class="comparison-column desktop">
         </div>
         <div class="comparison-column col-1 header titleOne" id="titleOne" >
-<!--            <h5 class="package" *ngIf="isCountry1Found">{{country1.common_name}}</h5>-->
-            <app-comparison-search [predefinedString]="selectedCountry" (countryEvent)="recieveCountry1($event)"></app-comparison-search>
-            <button *ngIf="isCountry1Found" routerLink="/country/{{country1.common_name}}" id="country1btn" class="details-btn" mat-flat-button>See details</button>
+            <app-comparison-search style="border-radius: 20px 0 0 20px" [predefinedString]="selectedCountry" (countryEvent)="recieveCountry1($event)"></app-comparison-search>
+<!--            <button *ngIf="isCountry1Found" routerLink="/country/{{country1.common_name}}" id="country1btn" class="details-btn" mat-flat-button>See details</button>-->
         </div>
         <div class="comparison-column col-2 header titleTwo" id="titleTwo">
-<!--            <h5 class="package" *ngIf="isCountry2Found">{{country2.common_name}}</h5>-->
             <app-comparison-search (countryEvent)="recieveCountry2($event)"></app-comparison-search>
-          <button *ngIf="isCountry2Found" routerLink="/country/{{country2.common_name}}" id="country2btn" class="w-50  mx-3 details-btn"  mat-flat-button>See details</button>
+<!--          <button *ngIf="isCountry2Found" routerLink="/country/{{country2.common_name}}" id="country2btn" class="w-50  mx-3 details-btn"  mat-flat-button>See details</button>-->
         </div>
         <div class="comparison-column header titleThree" id="titleThree" >
-<!--            <h5 class="package" *ngIf="isCountry3Found">{{country3.common_name}}</h5>-->
-            <app-comparison-search (countryEvent)="recieveCountry3($event)"></app-comparison-search>
-          <button *ngIf="isCountry3Found" routerLink="/country/{{country3.common_name}}" id="country3btn" class="w-50  mx-3 details-btn"  mat-flat-button>See details</button>
+            <app-comparison-search style="border-radius: 0 20px 20px 0" (countryEvent)="recieveCountry3($event)"></app-comparison-search>
+<!--          <button *ngIf="isCountry3Found" routerLink="/country/{{country3.common_name}}" id="country3btn" class="w-50  mx-3 details-btn"  mat-flat-button>See details</button>-->
         </div>
 <!--        <div class="comparison-column desktop">-->
 <!--        </div>-->
+    </div>
+    <div class="comparison-header">
+      <div class="comparison-column desktop">
+      </div>
+      <div class="comparison-column col-1 header titleOne" >
+        <button *ngIf="isCountry1Found" routerLink="/country/{{country1.common_name}}" id="country1btn" class="details-btn" mat-flat-button>See details</button>
+      </div>
+      <div class="comparison-column col-2 header titleTwo" >
+        <button *ngIf="isCountry2Found" routerLink="/country/{{country2.common_name}}" id="country2btn" class="details-btn"  mat-flat-button>See details</button>
+      </div>
+      <div class="comparison-column header titleThree"  >
+        <button *ngIf="isCountry3Found" routerLink="/country/{{country3.common_name}}" id="country3btn" class="details-btn"  mat-flat-button>See details</button>
+      </div>
     </div>
 
 
