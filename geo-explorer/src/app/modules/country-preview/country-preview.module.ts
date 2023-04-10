@@ -7,6 +7,7 @@ import { CountryMapComponent } from './components/country-map/country-map.compon
 import {LeafletModule} from "@asymmetrik/ngx-leaflet";
 import { CountryInfoComponent } from './components/country-info/country-info.component';
 import {MatDividerModule} from "@angular/material/divider";
+import {MatButtonModule} from "@angular/material/button";
 
 
 
@@ -22,7 +23,8 @@ import {MatDividerModule} from "@angular/material/divider";
         NgOptimizedImage,
         RouterLink,
         LeafletModule,
-        MatDividerModule
+        MatDividerModule,
+        MatButtonModule
     ]
 })
 export class CountryPreviewModule { }
