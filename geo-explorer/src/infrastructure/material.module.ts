@@ -5,8 +5,11 @@ import {MatCardModule} from "@angular/material/card";
 import {MatInputModule} from "@angular/material/input";
 import {MatIconModule} from "@angular/material/icon";
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
-import {MatDividerModule} from "@angular/material/divider";
 import {MatTooltipModule} from "@angular/material/tooltip";
+import {MatOptionModule} from "@angular/material/core";
+import {MatSelectModule} from "@angular/material/select";
+import {MatCheckboxModule} from "@angular/material/checkbox";
+import {MatDividerModule} from "@angular/material/divider";
 
 @NgModule({
   declarations: [],
@@ -17,8 +20,11 @@ import {MatTooltipModule} from "@angular/material/tooltip";
     MatInputModule,
     MatIconModule,
     MatAutocompleteModule,
-    MatDividerModule,
     MatTooltipModule,
+    MatOptionModule,
+    MatSelectModule,
+    MatCheckboxModule,
+    MatDividerModule
   ],
   exports: [
     MatFormFieldModule,
@@ -26,8 +32,12 @@ import {MatTooltipModule} from "@angular/material/tooltip";
     MatInputModule,
     MatIconModule,
     MatAutocompleteModule,
-    MatDividerModule,
     MatTooltipModule,
+    MatOptionModule,
+    MatSelectModule,
+    MatCheckboxModule,
+    MatDividerModule
   ]
+
 })
 export class MaterialModule { }
