@@ -1,10 +1,8 @@
-import {ChangeDetectorRef, Component, EventEmitter, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, ChangeDetectorRef, Component, EventEmitter, OnInit, ViewChild} from '@angular/core';
 import {FormControl, FormGroup} from "@angular/forms";
 import {animate, AUTO_STYLE, state, style, transition, trigger} from "@angular/animations";
-import {BehaviorSubject, map, Observable, startWith} from "rxjs";
+import {BehaviorSubject} from "rxjs";
 import {CountryService} from "../../shared/services/country-service";
-import {CountryListItem} from "../../countries-compare/components/comparison-search/comparison-search.component";
-import {inputNames} from "@angular/cdk/schematics";
 import {MatPaginator, PageEvent} from "@angular/material/paginator";
 import {MatTableDataSource} from "@angular/material/table";
 
@@ -32,18 +30,16 @@ export interface CountryListItemDetailed{
   ]
 })
 
-export class CountriesListComponent implements  OnInit{
+export class CountriesListComponent implements  OnInit,AfterViewInit{
 
   sortDirection="arrow_upward";
   criteriums=["Name","Population","Area","Continent"];
   advancedSearchIcon="tune"
   collapsed=true
   continents= ["Europe","Asia","North America","South America","Africa","Antartica","Oceania"];
-
   options: CountryListItemDetailed[] = [];
   filteredCountries:CountryListItemDetailed[]=[];
   previewCountries:CountryListItemDetailed[]=[];
-
   myControl = new FormControl<string>('');
   sortInput= new FormControl('Name');
   continentsSelected=new FormControl("");
@@ -64,23 +60,20 @@ export class CountriesListComponent implements  OnInit{
       continents:this.continentsSelected,
     }
   )
-
-  sss: any;
   isIndependent=true;
   isNotIndependent=true;
-
   dataSource= new MatTableDataSource<CountryListItemDetailed>();
   totalRows = 0;
   pageSize = 5;
   currentPage = 0;
   pageSizeOptions: number[] = [5, 10, 25, 100];
   obs:  BehaviorSubject<CountryListItemDetailed[]>;
+  @ViewChild('ridesPaginator') ridesPaginator!: MatPaginator;
   constructor(private changeDetectorRef: ChangeDetectorRef, private countryService: CountryService) {
     this.obs = this.dataSource.connect();
   }
-  @ViewChild('ridesPaginator') ridesPaginator!: MatPaginator;
-  ngAfterViewInit(){
 
+  ngAfterViewInit(){
     this.dataSource.paginator = this.ridesPaginator;
   }
 
@@ -100,7 +93,6 @@ export class CountriesListComponent implements  OnInit{
       this.advancedSearchIcon="tune";
       this.collapsed = !this.collapsed;
     }
-
   }
 
   ngOnInit(): void {
@@ -130,17 +122,18 @@ export class CountriesListComponent implements  OnInit{
       filterValue=this.myControl.value.toLowerCase();
     this.filteredCountries=this.options
     this.sortCountries();
-    if (filterValue!=null && filterValue!=undefined && filterValue!="") {
+    if (filterValue != null && filterValue!="")
       this.filteredCountries = this.filteredCountries.filter(option => option.name.toLowerCase().includes(filterValue));
-    }
-    console.log(this.filteredCountries.length)
-    if (this.continentsSelected.value?.length!=0 &&this.continentsSelected.value!=undefined && this.continentsSelected!=null){
+    if (this.continentsSelected.value?.length != 0 && this.continentsSelected.value != undefined)
       this.filteredCountries=this.filteredCountries.filter(option=>this.continentsSelected.value?.includes(option.continent));
-    }
-    if (this.minPopulationInput.value!=null)
+    if (this.minPopulationInput.value!=null && this.minPopulationInput.valid)
       this.filteredCountries=this.filteredCountries.filter(option=>option.population>=parseInt(this.minPopulationInput.value!));
-    if (this.maxPopulationInput.value!=null)
+    if (this.maxPopulationInput.value!=null  && this.maxPopulationInput.valid)
       this.filteredCountries=this.filteredCountries.filter(option=>option.population<=parseInt(this.maxPopulationInput.value!));
+    if (this.minAreaInput.value!=null && this.minAreaInput.valid)
+      this.filteredCountries=this.filteredCountries.filter(option=>option.area>=parseInt(this.minAreaInput.value!));
+    if (this.maxAreaInput.value!=null  && this.maxAreaInput.valid)
+      this.filteredCountries=this.filteredCountries.filter(option=>option.area<=parseInt(this.maxAreaInput.value!));
     if (!this.isIndependent)
       this.filteredCountries=this.filteredCountries.filter(option=> !option.independent);
     if (!this.isNotIndependent)
@@ -151,78 +144,6 @@ export class CountriesListComponent implements  OnInit{
       this.ridesPaginator.pageIndex = this.currentPage;
       this.ridesPaginator.length = this.filteredCountries.length;
     });
-  }
-  compareNameAsc( a:CountryListItemDetailed, b:CountryListItemDetailed ) {
-    if ( a.name < b.name ){
-      return -1;
-    }
-    if ( a.name > b.name ){
-      return 1;
-    }
-    return 0;
-  }
-  compareNameDesc( a:CountryListItemDetailed, b:CountryListItemDetailed ) {
-    if ( a.name < b.name ){
-      return 1;
-    }
-    if ( a.name > b.name ){
-      return -1;
-    }
-    return 0;
-  }
-  compareContinentAsc( a:CountryListItemDetailed, b:CountryListItemDetailed ) {
-    if ( a.continent < b.continent ){
-      return -1;
-    }
-    if ( a.continent > b.continent ){
-      return 1;
-    }
-    return 0;
-  }
-  compareContinentDesc( a:CountryListItemDetailed, b:CountryListItemDetailed ) {
-    if ( a.continent < b.continent ){
-      return 1;
-    }
-    if ( a.continent > b.continent ){
-      return -1;
-    }
-    return 0;
-  }
-  comparePopulationAsc( a:CountryListItemDetailed, b:CountryListItemDetailed ) {
-    if ( a.population < b.population ){
-      return -1;
-    }
-    if ( a.population > b.population ){
-      return 1;
-    }
-    return 0;
-  }
-  comparePopulationDesc( a:CountryListItemDetailed, b:CountryListItemDetailed ) {
-    if ( a.population < b.population ){
-      return 1;
-    }
-    if ( a.population > b.population ){
-      return -1;
-    }
-    return 0;
-  }
-  compareAreaAsc( a:CountryListItemDetailed, b:CountryListItemDetailed ) {
-    if ( a.area < b.area ){
-      return -1;
-    }
-    if ( a.area > b.area ){
-      return 1;
-    }
-    return 0;
-  }
-  compareAreaDesc( a:CountryListItemDetailed, b:CountryListItemDetailed ) {
-    if ( a.area < b.area ){
-      return 1;
-    }
-    if ( a.area > b.area ){
-      return -1;
-    }
-    return 0;
   }
 
   sortCountries() {
@@ -259,15 +180,12 @@ export class CountriesListComponent implements  OnInit{
       }
     }
   }
-
   clearSearch() {
     this.myControl.reset();
   }
-
   isSearchBlank() :boolean{
     return !(this.myControl.value == "" || this.myControl.value == null);
   }
-
   resetFilters() {
     this.isIndependent=true;
     this.isNotIndependent=true;
@@ -278,5 +196,77 @@ export class CountriesListComponent implements  OnInit{
     this.pageSize = event.pageSize;
     this.currentPage = event.pageIndex;
     this.filterCountries();
+  }
+  private compareNameAsc( a:CountryListItemDetailed, b:CountryListItemDetailed ) {
+    if ( a.name < b.name ){
+      return -1;
+    }
+    if ( a.name > b.name ){
+      return 1;
+    }
+    return 0;
+  }
+  private compareNameDesc( a:CountryListItemDetailed, b:CountryListItemDetailed ) {
+    if ( a.name < b.name ){
+      return 1;
+    }
+    if ( a.name > b.name ){
+      return -1;
+    }
+    return 0;
+  }
+  private compareContinentAsc( a:CountryListItemDetailed, b:CountryListItemDetailed ) {
+    if ( a.continent < b.continent ){
+      return -1;
+    }
+    if ( a.continent > b.continent ){
+      return 1;
+    }
+    return 0;
+  }
+  private compareContinentDesc( a:CountryListItemDetailed, b:CountryListItemDetailed ) {
+    if ( a.continent < b.continent ){
+      return 1;
+    }
+    if ( a.continent > b.continent ){
+      return -1;
+    }
+    return 0;
+  }
+  private comparePopulationAsc( a:CountryListItemDetailed, b:CountryListItemDetailed ) {
+    if ( a.population < b.population ){
+      return -1;
+    }
+    if ( a.population > b.population ){
+      return 1;
+    }
+    return 0;
+  }
+  private comparePopulationDesc( a:CountryListItemDetailed, b:CountryListItemDetailed ) {
+    if ( a.population < b.population ){
+      return 1;
+    }
+    if ( a.population > b.population ){
+      return -1;
+    }
+    return 0;
+  }
+  private compareAreaAsc( a:CountryListItemDetailed, b:CountryListItemDetailed ) {
+    if ( a.area < b.area ){
+      return -1;
+    }
+    if ( a.area > b.area ){
+      return 1;
+    }
+    return 0;
+  }
+  private compareAreaDesc( a:CountryListItemDetailed, b:CountryListItemDetailed ) {
+    if ( a.area < b.area ){
+      return 1;
+    }
+    if ( a.area > b.area ){
+      return -1;
+    }
+    return 0;
   }
 }
