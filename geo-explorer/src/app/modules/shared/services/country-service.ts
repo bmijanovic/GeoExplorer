@@ -49,6 +49,8 @@ export class CountryService {
             borders: details.borders,
             map_relation_id: Number(details.maps['openStreetMaps'].split("/").slice(-1)[0])
         }
+        if(country.common_name === "Serbia")
+          country.map_relation_id = 9088937;
         return country;
     }
 

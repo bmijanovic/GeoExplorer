@@ -40,6 +40,11 @@ export class CountryInfoComponent implements OnInit{
           });
 
           for (let i in this.country.borders){
+            if(this.country.borders[i] === "UNK" && this.country.common_name === "Albania")
+              this.country.borders[i] = "SRB";
+            else if(this.country.borders[i] === "UNK")
+              continue
+
             this._countryService.getCountryDetailsByCode(this.country.borders[i]).subscribe({
               next: (details) => {
                 this.borderCountries.push(this._countryService.parseToCountry(details[0]));
