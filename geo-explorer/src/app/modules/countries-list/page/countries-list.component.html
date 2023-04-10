@@ -103,7 +103,7 @@
 
 </div>
 <div class="d-flex justify-content-center w-100">
-<div *ngIf="filteredCountries.length>0" class="d-flex justify-content-center w-75 mb-5">
+<div *ngIf="filteredCountries.length>0" class="d-flex justify-content-center w-75 mt-3 mb-1">
   <mat-paginator #ridesPaginator [length]="totalRows" [pageIndex]="currentPage" [pageSize]="pageSize"
                  [pageSizeOptions]="pageSizeOptions" (page)="pageChanged($event)" aria-label="Select page"
                  class="card-bg w-100 d-flex justify-content-center" style="background-color: transparent;"></mat-paginator>
