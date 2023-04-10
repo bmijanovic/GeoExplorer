@@ -37,7 +37,7 @@ export class ComparisonTableComponent implements OnInit, OnDestroy {
   }
 
   recieveCountry1($event: string) {
-    if($event == "") return;
+    if($event == "" || $event == "Kosovo") return;
     this.country1Subscription = this.countryService.getCountryDetails($event).subscribe({
       next: (details) => {
         if(details != null)
@@ -55,7 +55,7 @@ export class ComparisonTableComponent implements OnInit, OnDestroy {
   }
 
   recieveCountry2($event: string) {
-    if($event == "") return;
+    if($event == "" || $event == "Kosovo") return;
     this.country2Subscription = this.countryService.getCountryDetails($event).subscribe({
       next: (details) => {
         if(details != null)
@@ -73,7 +73,7 @@ export class ComparisonTableComponent implements OnInit, OnDestroy {
   }
 
   recieveCountry3($event: string) {
-    if($event == "") return;
+    if($event == "" || $event == "Kosovo") return;
     const btn = document.getElementById("country3btn") as HTMLButtonElement
     this.country3Subscription = this.countryService.getCountryDetails($event).subscribe({
       next: (details) => {
