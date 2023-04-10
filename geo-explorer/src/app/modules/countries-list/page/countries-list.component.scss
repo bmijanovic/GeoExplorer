@@ -1,0 +1,66 @@
+#searchFormField{
+  width: 40%;
+  min-width: 350px;
+}
+input{
+  color: black;
+}
+
+#sortCriteriumFormField:hover, #sortCriteriumFormField mat-label:hover{
+  cursor: pointer;
+}
+#sortDirectionIcon {
+  cursor: pointer;
+}
+
+.divider{
+  height: 2px;
+  width: 100%;
+  background-color: #94af9f;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+::ng-deep .mat-mdc-paginator-container{
+  color: black!important;
+}
+
+::ng-deep .mat-mdc-paginator-container svg{
+  fill: black!important;
+}
+mat-error{
+  font-size: 12px;
+}
+
+::ng-deep mat-checkbox label{
+  color: black !important;
+}
+
+::ng-deep  div.mdc-checkbox__background{
+  border: 2px solid #94af9f !important;
+  border-radius: 2px;
+}
+::ng-deep .mat-mdc-checkbox-checked div.mdc-checkbox__background{
+  background-color: #94af9f !important;
+}
+
+::ng-deep .mdc-notched-outline{
+  background-color: rgba(256,256,256,0.3) !important;
+  color: black !important;
+}
+
+::ng-deep .mdc-notched-outline label{
+  color: #94AF9F !important;
+}
+
+::ng-deep mat-form-field input::placeholder{
+  color: #94af9f !important;
+}
+
+::ng-deep mat-form-field input{
+  font-weight: bold !important;
+}
+::ng-deep mat-select span{
+  color: black!important;
+  font-weight: bold;
+}
