@@ -30,6 +30,12 @@ h5 {
   color: black;
 }
 
+.details-btn {
+  background-color: var(--DarkGreen) !important;
+  font-weight: bold;
+  line-height: 0.8rem;
+}
+
 h5.package {
   background:var(--LightGreen);
   cursor:pointer;
@@ -144,6 +150,13 @@ p.desktop {
 
 @media only screen and (max-width:780px) {
 
+  .details-btn {
+    font-size: 0.7rem;
+    line-height: 0.8rem;
+    margin: auto;
+  }
+
+
   body {
     width:100%;
     margin:0 auto;
@@ -168,7 +181,7 @@ p.desktop {
     margin-bottom:0;
   }
 
-  h5,p {
+  h5,p,li {
     font-size:.8rem;
   }
 

@@ -22,12 +22,18 @@ export class ComparisonTableComponent implements OnInit, OnDestroy {
   country1Subscription: Subscription = new Subscription();
   country2Subscription: Subscription = new Subscription();
   country3Subscription: Subscription = new Subscription();
+  selectedCountry: string = "";
   constructor(
       private countryService: CountryService
   ) {}
 
   ngOnInit(): void {
-
+    this.countryService.selectedCountry$.subscribe({
+      next: (name) => {
+        this.selectedCountry = name;
+        this.recieveCountry1(name);
+      }
+    })
   }
 
   recieveCountry1($event: string) {
@@ -42,8 +48,8 @@ export class ComparisonTableComponent implements OnInit, OnDestroy {
           console.log(this.country1)
         }
       },
-      error: (err) => {
-        alert("First country does not exist")
+      error: err => {
+        this.isCountry1Found = false;
       }
     })
   }
@@ -60,14 +66,15 @@ export class ComparisonTableComponent implements OnInit, OnDestroy {
           console.log(this.country2)
         }
       },
-      error: (err) => {
-        alert("Second country does not exist")
+      error: err => {
+        this.isCountry3Found = false;
       }
     })
   }
 
   recieveCountry3($event: string) {
     if($event == "") return;
+    const btn = document.getElementById("country3btn") as HTMLButtonElement
     this.country3Subscription = this.countryService.getCountryDetails($event).subscribe({
       next: (details) => {
         if(details != null)
@@ -78,8 +85,8 @@ export class ComparisonTableComponent implements OnInit, OnDestroy {
           console.log(this.country3)
         }
       },
-      error: (err) => {
-        alert("Third country does not exist")
+      error: err => {
+        this.isCountry3Found = false;
       }
     })
   }
@@ -89,54 +96,6 @@ export class ComparisonTableComponent implements OnInit, OnDestroy {
     this.country3Subscription.unsubscribe();
   }
 }
-
-
-// //gets the element id that was clicked on
-//   getId = (el) => {
-//
-//     let removeClass, classOne, classTwo;
-//
-//     //get element classes
-//     let addClass = document.querySelectorAll(`.${el}`);
-//
-//     //function to add class
-//     addClassFunc = () => {
-//
-//       //gets all classes related to the ID that was clicked on e.g. if ID clicked was titleOne then target all titleOne classes
-//       addClass.forEach((el) => {
-//         el.classList.add('active');
-//       });
-//     };
-//
-//     //function to remove active class - if ID clicked was titleOne we target titleTwo and titleThree classes to remove active class
-//
-//     removeClassFunc = () => {
-//       removeClass = document.querySelectorAll(`.${classOne}, .${classTwo}`);
-//       removeClass.forEach((el) => {
-//         el.classList.remove('active');
-//       });
-//     };
-//
-//     //finds the columns which we remove active class from
-//     if (el === 'titleOne') {
-//       classOne = 'titleTwo';
-//       classTwo = 'titleThree';
-//
-//     } else if (el === 'titleTwo') {
-//       classOne = 'titleOne';
-//       classTwo = 'titleThree';
-//
-//     } else if (el === 'titleThree') {
-//       classOne = 'titleOne';
-//       classTwo = 'titleTwo';
-//
-//     };
-//
-//     //call functions to remove and add active class
-//     addClassFunc();
-//     removeClassFunc();
-//   };
-// };
 
 
 

@@ -1,5 +1,7 @@
 import {Component, Input} from '@angular/core';
 import {CountryListItemDetailed} from "../../page/countries-list.component";
+import {Router} from "@angular/router";
+import {CountryService} from "../../../shared/services/country-service";
 
 @Component({
   selector: 'app-country-card',
@@ -9,6 +11,11 @@ import {CountryListItemDetailed} from "../../page/countries-list.component";
 export class CountryCardComponent {
 
   @Input() country: any;
+
+  constructor(
+    private router: Router,
+    private countryService: CountryService
+  ) {}
 
   displayNumbers(num:number){
     if (num>1000000 && num<1000000000)
@@ -23,4 +30,8 @@ export class CountryCardComponent {
   }
 
 
+  compare() {
+    this.countryService.setCountryToCompare(this.country.name);
+    this.router.navigateByUrl("/compare");
+  }
 }

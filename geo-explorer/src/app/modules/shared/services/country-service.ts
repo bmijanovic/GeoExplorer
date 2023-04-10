@@ -11,7 +11,14 @@ import {Country} from "../models/country";
 export class CountryService {
     url = `${environment.apiHost}`;
 
+    private compareCountry$ = new BehaviorSubject<string>("");
+    selectedCountry$ = this.compareCountry$.asObservable();
+
     constructor(private http: HttpClient) {}
+
+    setCountryToCompare(name: string) {
+      this.compareCountry$.next(name);
+    }
 
     getCountryDetails(name: string): Observable<any> {
         return this.http.get<any>(`${this.url}/name/${name}?fullText=true`);
@@ -44,5 +51,7 @@ export class CountryService {
         }
         return country;
     }
+
+
 
 }

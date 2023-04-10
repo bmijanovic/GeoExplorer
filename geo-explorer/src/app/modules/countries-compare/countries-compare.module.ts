@@ -5,6 +5,8 @@ import {SharedModule} from "../shared/shared.module";
 import { ComparisonTableComponent } from './components/comparison-table/comparison-table.component';
 import { ComparisonSearchComponent } from './components/comparison-search/comparison-search.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {MatButtonModule} from "@angular/material/button";
+import {RouterLink} from "@angular/router";
 
 
 
@@ -18,7 +20,9 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
     CommonModule,
     SharedModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    MatButtonModule,
+    RouterLink
   ]
 })
 export class CountriesCompareModule { }
