@@ -1,0 +1,29 @@
+.example-form {
+  width: 100%;
+  margin: auto;
+  padding: 0;
+}
+
+
+
+.example-full-width {
+  font-size: 1.5rem;
+  width: 80%;
+  margin-top: 25px;
+}
+
+@media only screen and (max-width:780px) {
+  .example-full-width {
+    font-size: 0.6rem;
+    width: 80%;
+    height: 100%;
+  }
+  //.example-form {
+  //  background: var(--Lime);
+  //}
+  .font {
+    font-size: 0.5rem;
+  }
+
+}
+

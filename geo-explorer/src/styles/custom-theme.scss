@@ -1,0 +1,125 @@
+
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@use 'node_modules/@angular/material/index' as mat;
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat.core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+
+$md-primary: (
+  50 : #fbfcf8,
+  100 : #f4f7ee,
+  200 : #edf2e3,
+  300 : #e6ecd7,
+  400 : #e0e8cf,
+  500 : #dbe4c6,
+  600 : #d7e1c0,
+  700 : #d2ddb9,
+  800 : #cdd9b1,
+  900 : #c4d1a4,
+  A100 : #ffffff,
+  A200 : #ffffff,
+  A400 : #ffffff,
+  A700 : #fefffc,
+  contrast: (
+    50 : #000000,
+    100 : #000000,
+    200 : #000000,
+    300 : #000000,
+    400 : #000000,
+    500 : #000000,
+    600 : #000000,
+    700 : #000000,
+    800 : #000000,
+    900 : #000000,
+    A100 : #000000,
+    A200 : #000000,
+    A400 : #000000,
+    A700 : #000000,
+  )
+);
+
+
+$md-accent: (
+  50 : #f2f5f3,
+  100 : #dfe7e2,
+  200 : #cad7cf,
+  300 : #b4c7bc,
+  400 : #a4bbad,
+  500 : #94af9f,
+  600 : #8ca897,
+  700 : #819f8d,
+  800 : #779683,
+  900 : #658672,
+  A100 : #fbfffc,
+  A200 : #c9fede,
+  A400 : #95ffbf,
+  A700 : #7bffb0,
+  contrast: (
+    50 : #000000,
+    100 : #000000,
+    200 : #000000,
+    300 : #000000,
+    400 : #000000,
+    500 : #000000,
+    600 : #000000,
+    700 : #000000,
+    800 : #000000,
+    900 : #ffffff,
+    A100 : #000000,
+    A200 : #000000,
+    A400 : #000000,
+    A700 : #000000,
+  )
+);
+
+
+$dark-primary: mat.define-palette($md-primary);
+$dark-accent: mat.define-palette($md-accent);
+// The warn palette is optional (defaults to red).
+$dark-warn: mat.define-palette(mat.$red-palette);
+
+// Create the theme object. A theme consists of configurations for individual
+// theming systems such as "color" or "typography".
+$dark-theme: mat.define-dark-theme((
+  color: (
+    primary: $dark-accent,
+    accent: $dark-primary,
+    warn: $dark-warn,
+  )
+));
+
+$light-theme: mat.define-light-theme((
+  color: (
+    primary: $dark-accent,
+    accent: $dark-primary,
+    warn: $dark-warn,
+  )
+));
+
+$my-custom-level: mat.define-typography-level(
+  $font-family: Poppins,
+  $font-weight: 400,
+  $font-size: 1rem,
+  $line-height: 1,
+  $letter-spacing: normal,
+);
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+
+@media (prefers-color-scheme: light) {
+  @include mat.all-component-themes($light-theme);
+}
+
+@media (prefers-color-scheme: dark) {
+  @include mat.all-component-themes($light-theme);
+}
