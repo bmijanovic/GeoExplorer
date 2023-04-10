@@ -18,7 +18,7 @@ export class CountryInfoComponent implements OnInit{
   @Input()
   countryName : string = ""
   constructor(private http: HttpClient, private _countryService: CountryService,
-              private router: Router, private route: ActivatedRoute) {}
+              private router: Router) {}
 
   ngOnInit() {
     this.loadCountryDetails(this.countryName);
@@ -34,7 +34,9 @@ export class CountryInfoComponent implements OnInit{
           this.languages = Object.values(this.country.languages);
 
           this.searchPhotos(this.country.capital).subscribe((response) => {
-            this.capitalImageUrl = response.photos[Math.floor(Math.random() * 20) % response.photos.length].src.landscape;
+            if (response.photos.length > 0){
+              this.capitalImageUrl = response.photos[Math.floor(Math.random() * 20) % response.photos.length].src.landscape;
+            }
           });
 
           for (let i in this.country.borders){
@@ -72,6 +74,4 @@ export class CountryInfoComponent implements OnInit{
     this._countryService.setCountryToCompare(this.country!.common_name);
     this.router.navigateByUrl("/compare");
   }
-
-  protected readonly window = window;
 }

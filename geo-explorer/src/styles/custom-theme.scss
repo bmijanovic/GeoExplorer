@@ -121,5 +121,5 @@ $my-custom-level: mat.define-typography-level(
 }
 
 @media (prefers-color-scheme: dark) {
-  @include mat.all-component-themes($dark-theme);
+  @include mat.all-component-themes($light-theme);
 }

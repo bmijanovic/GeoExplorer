@@ -7,6 +7,7 @@ import {CountryPreviewComponent} from "../app/modules/country-preview/page/count
 const routes: Routes = [
   {path: 'home', component: CountriesListComponent},
   {path: 'country/:countryName', component: CountryPreviewComponent},
+  {path: 'country/Kosovo',  redirectTo: '/home'},
   {path: 'compare', component: CountriesCompareComponent},
   {path: '**',  redirectTo: '/home'}
 ];
