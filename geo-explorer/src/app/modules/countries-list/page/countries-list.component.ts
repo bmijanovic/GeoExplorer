@@ -120,7 +120,7 @@ export class CountriesListComponent implements  OnInit,AfterViewInit{
     let filterValue="";
     if (typeof this.myControl.value === "string")
       filterValue=this.myControl.value.toLowerCase();
-    this.filteredCountries=this.options
+    this.filteredCountries=this.options;
     this.sortCountries();
     if (filterValue != null && filterValue!="")
       this.filteredCountries = this.filteredCountries.filter(option => option.name.toLowerCase().includes(filterValue));

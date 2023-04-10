@@ -50,6 +50,11 @@ h5{
 .country-map{
   min-height: 350px;
 }
+#compare-button{
+  background-color: #94af9f;
+  max-width: 150px;
+  border: 0;
+}
 
 @media only screen and (max-width: 768px) {
   .col-capital-img{

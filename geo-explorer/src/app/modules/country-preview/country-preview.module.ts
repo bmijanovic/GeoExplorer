@@ -6,6 +6,7 @@ import {RouterLink} from "@angular/router";
 import { CountryMapComponent } from './components/country-map/country-map.component';
 import {LeafletModule} from "@asymmetrik/ngx-leaflet";
 import { CountryInfoComponent } from './components/country-info/country-info.component';
+import {MatDividerModule} from "@angular/material/divider";
 
 
 
@@ -20,7 +21,8 @@ import { CountryInfoComponent } from './components/country-info/country-info.com
         SharedModule,
         NgOptimizedImage,
         RouterLink,
-        LeafletModule
+        LeafletModule,
+        MatDividerModule
     ]
 })
 export class CountryPreviewModule { }

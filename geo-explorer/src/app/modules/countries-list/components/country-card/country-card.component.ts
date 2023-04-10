@@ -29,7 +29,6 @@ export class CountryCardComponent {
 
   }
 
-
   compare() {
     this.countryService.setCountryToCompare(this.country.name);
     this.router.navigateByUrl("/compare");

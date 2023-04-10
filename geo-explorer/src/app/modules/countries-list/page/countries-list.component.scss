@@ -64,3 +64,12 @@ mat-error{
   color: black!important;
   font-weight: bold;
 }
+::ng-deep.mat-paginator .mat-paginator-container{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center!important;
+}
+
+::ng-deep .mat-mdc-paginator-container{
+  justify-content: center!important;
+}

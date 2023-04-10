@@ -67,7 +67,7 @@ export class ComparisonTableComponent implements OnInit, OnDestroy {
         }
       },
       error: err => {
-        this.isCountry3Found = false;
+        this.isCountry2Found = false;
       }
     })
   }

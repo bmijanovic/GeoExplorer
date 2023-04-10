@@ -68,5 +68,10 @@ export class CountryInfoComponent implements OnInit{
     });
   }
 
+  compare() {
+    this._countryService.setCountryToCompare(this.country!.common_name);
+    this.router.navigateByUrl("/compare");
+  }
+
   protected readonly window = window;
 }
