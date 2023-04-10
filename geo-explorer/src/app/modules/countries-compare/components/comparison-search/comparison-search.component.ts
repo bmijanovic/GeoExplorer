@@ -29,7 +29,8 @@ export class ComparisonSearchComponent implements OnInit{
     this.countryService.getAllCountries().subscribe({
       next: (countries) => {
         for(let i = 0; i < countries.length; i++)
-          this.options.push({name: countries[i].name.common})
+          if(countries[i].name.common != "Kosovo")
+            this.options.push({name: countries[i].name.common})
       }
     })
     this.filteredOptions = this.myControl.valueChanges.pipe(

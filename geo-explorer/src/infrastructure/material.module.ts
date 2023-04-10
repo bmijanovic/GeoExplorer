@@ -25,7 +25,8 @@ import {MatPaginatorModule} from "@angular/material/paginator";
     MatOptionModule,
     MatSelectModule,
     MatCheckboxModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatDividerModule
   ],
   exports: [
     MatFormFieldModule,
@@ -37,7 +38,8 @@ import {MatPaginatorModule} from "@angular/material/paginator";
     MatOptionModule,
     MatSelectModule,
     MatCheckboxModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatDividerModule,
   ]
 
 })
