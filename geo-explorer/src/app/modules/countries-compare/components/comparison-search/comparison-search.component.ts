@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormControl} from "@angular/forms";
 import {map, Observable, startWith} from "rxjs";
 import {CountryService} from "../../../shared/services/country-service";
@@ -15,17 +15,19 @@ export interface CountryListItem {
 })
 export class ComparisonSearchComponent implements OnInit{
 
+  @Input()
+  predefinedString: string = ""
   @Output()
   countryEvent = new EventEmitter<string>();
-  myControl = new FormControl<string | CountryListItem>('');
+  myControl = new FormControl<string | CountryListItem>("");
   options: CountryListItem[] = [];
   filteredOptions!: Observable<CountryListItem[]>;
-
   constructor(
       private countryService: CountryService
   ) {}
 
   ngOnInit() {
+    this.myControl.setValue({name: this.predefinedString})
     this.countryService.getAllCountries().subscribe({
       next: (countries) => {
         for(let i = 0; i < countries.length; i++)

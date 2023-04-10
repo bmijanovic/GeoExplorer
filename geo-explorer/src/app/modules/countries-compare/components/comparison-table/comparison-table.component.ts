@@ -22,12 +22,18 @@ export class ComparisonTableComponent implements OnInit, OnDestroy {
   country1Subscription: Subscription = new Subscription();
   country2Subscription: Subscription = new Subscription();
   country3Subscription: Subscription = new Subscription();
+  selectedCountry: string = "";
   constructor(
       private countryService: CountryService
   ) {}
 
   ngOnInit(): void {
-
+    this.countryService.selectedCountry$.subscribe({
+      next: (name) => {
+        this.selectedCountry = name;
+        this.recieveCountry1(name);
+      }
+    })
   }
 
   recieveCountry1($event: string) {

@@ -9,7 +9,7 @@
         </div>
         <div class="comparison-column col-1 header titleOne" id="titleOne" >
 <!--            <h5 class="package" *ngIf="isCountry1Found">{{country1.common_name}}</h5>-->
-            <app-comparison-search (countryEvent)="recieveCountry1($event)"></app-comparison-search>
+            <app-comparison-search [predefinedString]="selectedCountry" (countryEvent)="recieveCountry1($event)"></app-comparison-search>
             <button *ngIf="isCountry1Found" routerLink="/country/{{country1.common_name}}" id="country1btn" class="w-50  mx-3 details-btn" mat-flat-button>See details</button>
         </div>
         <div class="comparison-column col-2 header titleTwo" id="titleTwo">
@@ -61,13 +61,13 @@
             <p>Coat of arm</p>
         </div>
         <div class="comparison-column feature-content titleOne active">
-            <img src="{{country1.coat_of_arm}}" alt="Country 1" *ngIf="isCountry1Found">
+            <img src="{{country1.coat_of_arm}}" alt="Coat of arm 1" *ngIf="isCountry1Found">
         </div>
         <div class="comparison-column feature-content centre titleTwo">
-            <img src="{{country2.coat_of_arm}}" alt="Country 2" *ngIf="isCountry2Found">
+            <img src="{{country2.coat_of_arm}}" alt="Coat of arm 2" *ngIf="isCountry2Found">
         </div>
         <div class="comparison-column feature-content titleThree">
-            <img src="{{country3.coat_of_arm}}" alt="Country 2" *ngIf="isCountry3Found">
+            <img src="{{country3.coat_of_arm}}" alt="Coat of arm 3" *ngIf="isCountry3Found">
         </div>
     </div>
 

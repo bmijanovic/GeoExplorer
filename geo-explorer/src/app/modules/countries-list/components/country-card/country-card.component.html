@@ -29,6 +29,6 @@
   </div>
   <div class="d-flex justify-content-center align-items-center align-self-center mt-3 w-100 position-absolute" style="bottom: 15px;">
     <button class="w-50  mx-3" style="background-color: #94af9f;font-weight: bold " routerLink="/country/{{country.name}}" mat-flat-button>View Details</button>
-    <button routerLink="/country/{{country.name}}" class="w-50  mx-3 align-items-center justify-content-center d-flex" style="background-color: #94af9f;font-weight: bold " mat-flat-button>Compare with...</button>
+    <button (click)="compare()" class="w-50  mx-3 align-items-center justify-content-center d-flex" style="background-color: #94af9f;font-weight: bold " mat-flat-button>Compare with...</button>
   </div>
 </mat-card>
